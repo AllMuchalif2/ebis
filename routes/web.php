@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutCtrl;
+use App\Http\Controllers\HomeCtrl;
 use App\Http\Controllers\MahasiswaCtrl;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Route;
@@ -10,20 +12,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('home', [
-        "title" => "home",
-    ]);
-});
+Route::get('/',[HomeCtrl::class, 'index']);
 Route::get('/mahasiswa', [MahasiswaCtrl::class, 'index']);
-Route::get('/about', function () {
-    return view('about', [
-        "title" => "about",
-        "nama" => "Al - Muchalif Arnama",
-        "website" => "https://arnama.com",
-        "image" => "logo-2.svg",
-    ]);
-});
+Route::get('/about',[AboutCtrl::class, 'index']);
 
 
 Route::get('/mahasiswa/{slug}', [MahasiswaCtrl::class, 'show']);

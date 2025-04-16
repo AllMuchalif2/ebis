@@ -10,7 +10,7 @@ class MahasiswaCtrl extends Controller
     public function index()
     {
         return view('mahasiswa', [
-            "title" => "Mahasiswa",
+            "title" => "mahasiswa",
             "data" => Mahasiswa::all(),
         ]);
     }
@@ -22,5 +22,4 @@ class MahasiswaCtrl extends Controller
             "skripsi" => Mahasiswa::find($slug),
         ]);
     }
-
 }
