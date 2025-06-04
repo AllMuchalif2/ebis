@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[HomeCtrl::class, 'index']);
 Route::get('/mahasiswa', [MahasiswaCtrl::class, 'index']);
+Route::get('/data-mahasiswa', [MahasiswaCtrl::class, 'data']);
 Route::get('/about',[AboutCtrl::class, 'index']);
 
 

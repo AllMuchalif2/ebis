@@ -15,6 +15,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ ($title === "about" ? 'active' : '') }}" href="about">about</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ ($title === "data mahasiswa" ? 'active' : '') }}" href="data-mahasiswa">data mahasiswa</a>
+                </li>
             </ul>
         </div>
     </div>
