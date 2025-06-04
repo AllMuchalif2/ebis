@@ -9,7 +9,11 @@ class MahasiswaCtrl extends Controller
 {
     public function index()
     {
-        return view('mahasiswa', [
+        // return view('mahasiswa', [
+        //     "title" => "mahasiswa",
+        //     "data" => Mahasiswa::all(),
+        // ]);
+        return view('dataMahasiswa', [
             "title" => "mahasiswa",
             "data" => Mahasiswa::all(),
         ]);

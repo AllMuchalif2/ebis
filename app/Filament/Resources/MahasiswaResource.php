@@ -20,16 +20,30 @@ class MahasiswaResource extends Resource
 {
     protected static ?string $model = Mahasiswa::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationLabel = 'Kelola Mahasiswa';
+    protected static ?string $slug = 'data-mahasiswa';
+    public static ?string $label = 'Data Mahasiswa';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
-                TextInput::make('nim'),
-                TextInput::make('nama'),
+                TextInput::make('nim')
+                    ->required()
+                    ->unique()
+                    ->label('NIM')
+                    ->placeholder('Masukkan NIM...'),
+                TextInput::make('nama')
+                    ->required()
+                    ->label('NAMA')
+                    ->placeholder('Masukkan Nama...'),
                 TextInput::make('progdi')
+                    ->required()
+                    ->label('PROGDI')
+                    ->placeholder('Masukkan Progdi...')
             ]);
     }
 
@@ -38,15 +52,31 @@ class MahasiswaResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('nim'),
-                TextColumn::make('nama'),
+
+                TextColumn::make('no')
+                ->label('No')
+                ->rowIndex(),
+                TextColumn::make('nim')
+                    ->searchable()
+                    ->sortable()
+                    ->copyable()
+                    ->copyMessage('berhasil disalin')
+                    ->label('NIM'),
+                TextColumn::make('nama')
+                    ->searchable()
+                    ->sortable()
+                    ->label('NAMA'),
                 TextColumn::make('progdi')
+                    ->searchable()
+                    ->sortable()
+                    ->label('PROGDI')
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
