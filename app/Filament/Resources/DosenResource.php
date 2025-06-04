@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MahasiswaResource\Pages;
-use App\Filament\Resources\MahasiswaResource\RelationManagers;
-use App\Models\Mahasiswa;
+use App\Filament\Resources\DosenResource\Pages;
+use App\Filament\Resources\DosenResource\RelationManagers;
+use App\Models\Dosen;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -15,35 +15,34 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-
-class MahasiswaResource extends Resource
+class DosenResource extends Resource
 {
-    protected static ?string $model = Mahasiswa::class;
+    protected static ?string $model = Dosen::class;
 
-    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationIcon = 'heroicon-o-user';
-    protected static ?string $navigationLabel = 'Kelola Mahasiswa';
-    protected static ?string $slug = 'data-mahasiswa';
-    public static ?string $label = 'Data Mahasiswa';
+    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
+    protected static ?string $navigationLabel = 'Kelola Dosen';
+    protected static ?string $slug = 'data-dosen';
+    public static ?string $label = 'Data Dosen';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
-                TextInput::make('nim')
+                TextInput::make('nidn')
                     ->required()
                     ->unique()
-                    ->label('Nomer Induk Mahasiswa')
-                    ->placeholder('Masukkan NIM...'),
-                TextInput::make('nama')
+                    ->label('Nomer Induk Dosen Nasional')
+                    ->placeholder('Masukkan NIDN...')
+                    ,
+                    TextInput::make('nama')
                     ->required()
-                    ->label('Nama')
-                    ->placeholder('Masukkan Nama...'),
-                TextInput::make('progdi')
+                    ->placeholder('Masukkan Nama...')
+                    ->label('Nama'),
+                    TextInput::make('keahlian')
                     ->required()
-                    ->label('Program Studi')
-                    ->placeholder('Masukkan Progdi...')
+                    ->placeholder('Masukkan Bidang Keahlian...')
+                    ->label('Bidang Keahlian'),
+
             ]);
     }
 
@@ -52,24 +51,23 @@ class MahasiswaResource extends Resource
         return $table
             ->columns([
                 //
-
                 TextColumn::make('no')
-                ->label('No')
-                ->rowIndex(),
-                TextColumn::make('nim')
+                    ->label('No')
+                    ->rowIndex(),
+                TextColumn::make('nidn')
                     ->searchable()
                     ->sortable()
                     ->copyable()
                     ->copyMessage('berhasil disalin')
-                    ->label('NIM'),
+                    ->label('NIDN'),
                 TextColumn::make('nama')
                     ->searchable()
                     ->sortable()
-                    ->label('NAMA'),
-                TextColumn::make('progdi')
+                    ->label('Nama'),
+                TextColumn::make('keahlian')
                     ->searchable()
                     ->sortable()
-                    ->label('PROGDI')
+                    ->label('Keahlian')
             ])
             ->filters([
                 //
@@ -77,6 +75,7 @@ class MahasiswaResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -95,9 +94,9 @@ class MahasiswaResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMahasiswas::route('/'),
-            'create' => Pages\CreateMahasiswa::route('/create'),
-            'edit' => Pages\EditMahasiswa::route('/{record}/edit'),
+            'index' => Pages\ListDosens::route('/'),
+            'create' => Pages\CreateDosen::route('/create'),
+            'edit' => Pages\EditDosen::route('/{record}/edit'),
         ];
     }
 }
